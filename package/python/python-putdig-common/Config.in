@@ -1,0 +1,5 @@
+config BR2_PACKAGE_PYTHON_PUTDIG_COMMON
+	bool "python-putdig-common"
+	select BR2_PACKAGE_PYTHON_PUMPKIN_SUPMCU_KUBOS
+	help
+	  putdig-common package for PuTDIG-CLI

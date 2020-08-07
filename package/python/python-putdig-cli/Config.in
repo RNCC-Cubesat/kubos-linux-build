@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PYTHON_PUTDIG_CLI
+	bool "python-putdig-cli"
+	select BR2_PACKAGE_PYTHON_PUTDIG_COMMON
+	select BR2_PACKAGE_PYTHON_PLUMBUM
+	help
+	  putdig-cli package for discovering, injecting and generating telemetry for RS3 modules.
+

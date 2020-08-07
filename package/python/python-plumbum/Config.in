@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_PLUMBUM
+	bool "python-plumbum"
+	default n
+	select BR2_PACKAGE_PYTHON_PARAMIKO # runtime
+	help
+	  Adds Plumbum CLI combinators and more!
+
+	  https://plumbum.readthedocs.io/en/latest/

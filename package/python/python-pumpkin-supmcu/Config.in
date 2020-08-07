@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PYTHON_PUMPKIN_SUPMCU
+	bool "python-pumpkin-supmcu"
+	help
+	  pumpkin-supmcu package for interfacing with Pumpkin SupMCU Modules
+
+	  https://gitlab.com/pumpkin-space-systems/public/pumpkin_supmcu.git

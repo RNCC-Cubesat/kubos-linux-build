@@ -1,0 +1,7 @@
+config BR2_PACKAGE_PYTHON_PUMPKIN_SUPMCU_KUBOS
+	bool "python-pumpkin-supmcu-kubos"
+	select BR2_PACKAGE_PYTHON_PUMPKIN_SUPMCU
+	help
+	  pumpkin-supmcu-kubos package for interfacing with Pumpkin SupMCU Modules via KubOS I2C HAL
+
+	  https://gitlab.com/pumpkin-space-systems/public/pumpkin-supmcu-kubos.git
