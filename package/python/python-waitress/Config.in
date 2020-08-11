@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_WAITRESS
+	bool "python-waitress"
+
+	help
+	  Waitress is meant to be a production-quality pure-Python WSGI server with very acceptable performance.
+	  It has no dependencies except ones which live in the Python standard library.
+
+	  https://github.com/Pylons/waitress
