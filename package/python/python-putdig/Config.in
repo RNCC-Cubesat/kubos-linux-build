@@ -1,0 +1,11 @@
+config BR2_PACKAGE_PYTHON_PUTDIG
+	bool "python-putdig"
+	select BR2_PACKAGE_PYTHON_PUTDIG_COMMON
+	select BR2_PACKAGE_PYTHON_PLUMBUM
+	select BR2_PACKAGE_PYTHON_FLASK_WTF
+	select BR2_PACKAGE_PYTHON_FLASK
+	select BR2_PACKAGE_PYTHON_WAITRESS
+
+	help
+	  putdig package for discovering, injecting and generating telemetry for RS3 modules via web interface.
+
