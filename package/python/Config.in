@@ -11,6 +11,7 @@ menu "Additional Python Packages"
 	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-putdig-cli/Config.in"
 	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-putdig-common/Config.in"
 	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-putdig/Config.in"
+	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-plumbum/Config.in"
 	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-waitress/Config.in"
 	source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/python/python-flask-wtf/Config.in"
 endmenu
