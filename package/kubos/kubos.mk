@@ -10,7 +10,7 @@
 ###############################################
 KUBOS_LICENSE = Apache-2.0
 KUBOS_LICENSE_FILES = LICENSE
-KUBOS_SITE = git://github.com/kubos/kubos
+KUBOS_SITE = https://gitlab.com/pumpkin-space-systems/public/kubos/-/archive/master
 KUBOS_PROVIDES = kubos-mai400
 KUBOS_INSTALL_STAGING = YES
 KUBOS_TARGET_FINALIZE_HOOKS += KUBOS_CREATE_CONFIG
@@ -21,7 +21,8 @@ KUBOS_CONFIG_FILE = $(TARGET_DIR)/etc/kubos-config.toml
 VERSION = $(call qstrip,$(BR2_KUBOS_VERSION))
 # If the version specified is a branch name, we need to go fetch the SHA1 for the branch's HEAD
 ifeq ($(shell git ls-remote --heads $(KUBOS_SITE) $(VERSION) | wc -l), 1)
-	KUBOS_VERSION := $(shell git ls-remote $(KUBOS_SITE) $(VERSION) | cut -c1-8)
+	#KUBOS_VERSION := $(shell git ls-remote $(KUBOS_SITE) $(VERSION) | cut -c1-8)
+	KUBOS_VERSION = $(VERSION)
 else
 	KUBOS_VERSION = $(VERSION)
 endif
