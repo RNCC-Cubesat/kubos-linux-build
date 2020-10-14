@@ -30,7 +30,7 @@ fi
 
 # Make sure that we can find the `dtc` command
 # (The binary is target-independent so we can just use the one in the BBB toolchain directory)
-export PATH=$PATH:/usr/bin/bbb_toolchain/usr/bin
+export PATH=$PATH:$BR2_HOST_DIR/usr/bin
 
 # Process command arguments
 
