@@ -1,3 +1,3 @@
 # md5 from https://pypi.python.org/pypi/pumpkin-supmcu, sha256 locally computed
-md5	80e722fd829a00af37932996d9403493  pumpkin_supmcu-1.1.1.tar.gz
-sha256	f5d04a3e51de9b3c6db9091836718a0b26afcc90ff44bdbace43f4af7b3c9a01  pumpkin_supmcu-1.1.1.tar.gz
+md5	6149b48cb3481a27c48d3d597c8b1126  pumpkin_supmcu-1.2.0.tar.gz
+sha256	a2f6adc50ae8eaf23916518ad375a1746ec5f3e9c50a326f28dfb7b379269797  pumpkin_supmcu-1.2.0.tar.gz

@@ -10,7 +10,7 @@
 ###############################################
 KUBOS_LICENSE = Apache-2.0
 KUBOS_LICENSE_FILES = LICENSE
-KUBOS_SITE = https://gitlab.com/pumpkin-space-systems/public/kubos/-/archive/master
+KUBOS_SITE = https://gitlab.com/pumpkin-space-systems/public/kubos/-/archive/feature-update_mcu_service
 KUBOS_PROVIDES = kubos-mai400
 KUBOS_INSTALL_STAGING = YES
 KUBOS_TARGET_FINALIZE_HOOKS += KUBOS_CREATE_CONFIG
