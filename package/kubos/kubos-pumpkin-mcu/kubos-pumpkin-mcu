@@ -3,6 +3,6 @@
 # Start the Pumpkin MCU service in the background 
 # passing in the location of the config.toml file 
 # (in the same directory as the service)
-/usr/bin/pumpkin-mcu-service -c /etc/kubos-config.toml -t kubos -p 1 &
+/usr/bin/pumpkin-mcu-service -c /etc/kubos-config.toml &
 
 exit 0
