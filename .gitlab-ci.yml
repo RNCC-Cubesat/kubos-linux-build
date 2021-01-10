@@ -54,7 +54,6 @@ build_iobc:
       - full_build.log
 
 release:
-  <<: *tagged
   stage: deploy
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
@@ -63,3 +62,5 @@ release:
     name: 'Release $KUBOS_TAG'
     tag_name: '$KUBOS_TAG'
     description: 'kubos release'
+  rules:
+    - if: $KUBOS_TAG =~ /^[0-9]+(\.[0-9]+)*$/
