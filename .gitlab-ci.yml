@@ -1,0 +1,52 @@
+stages:
+  - build
+  - deploy
+
+default:
+  image:
+    name: kubos/kubos-dev:latest
+    entrypoint: "/usr/bin/env"
+  tags:
+    - kubos
+    - docker
+  stage: build
+
+.build_bbb: &build_bbb
+  script:
+    - cd ~/project/kubos-linux-build
+    - ./build.sh | tee full_build.log
+  artifacts:
+    name: '$KUBOS_BOARD'
+    paths:
+      - ../buildroot-2019.02.2/output/images/kubos-linux.tar.gz
+      - ../buildroot-2019.02.2/output/images/aux-sd.tar.gz
+      - ../buildroot-2019.02.2/output/images/kpack-base.itb
+      - full_build.log
+  rules:
+    - if: '$KUBOS_TAG =~ /^[0-9]+(\.[0-9]+)*$/' # KUBOS_TAG passed via multi-project pipeline
+
+build_bbb:
+  variables:
+    KUBOS_BOARD: beaglebone-black
+  <<: *build_bbb
+
+build_mbm2:
+  variables:
+    KUBOS_BOARD: pumpkin-mbm2
+  <<: *build_bbb
+
+build_iobc:
+  variables:
+    KUBOS_BOARD: at91sam9g20isis
+  script:
+    - cd ~/project/kubos-linux-build
+    - ./build.sh | tee full_build.log
+  artifacts:
+    name: '$KUBOS_BOARD'
+    paths:
+      - ../buildroot-2019.02.2/output/images/kubos-linux.tar.gz
+      - ../buildroot-2019.02.2/output/images/at91sam9g20isis.dtb
+      - ../buildroot-2019.02.2/output/images/u-boot.bin
+      - full_build.log
+  rules:
+    - if: '$KUBOS_TAG =~ /^[0-9]+(\.[0-9]+)*$/' # KUBOS_TAG passed via multi-project pipeline
