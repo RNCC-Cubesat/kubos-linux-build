@@ -17,7 +17,6 @@ default:
 
 .build_bbb: &build_bbb
   script:
-    - cd ~/project/kubos-linux-build
     - ./build.sh | tee full_build.log
   artifacts:
     name: '$KUBOS_BOARD'
