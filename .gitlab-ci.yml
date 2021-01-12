@@ -16,8 +16,7 @@ default:
 
 .tagged: &tagged  # only build if both kubos and kubos-linux-build are tagged
   rules:
-    - if: $KUBOS_TAG      # KUBOS_TAG passed from public/kubos (multi-project pipeline)
-    - if: $CI_COMMIT_TAG
+    - if: $KUBOS_TAG && $CI_COMMIT_TAG  # KUBOS_TAG passed from public/kubos (multi-project pipeline)
 
 .build_bbb: &build_bbb
   script:
