@@ -16,9 +16,12 @@ cd .. #cd out of the kubos-linux-build directory
 
 echo "Getting Buildroot"
 
-wget $buildroot_url && tar xzf $buildroot_tar && rm $buildroot_tar
+if [ ! -d "${buildroot_tar%.tar.gz}" ]
+then
+  wget $buildroot_url && tar xzf $buildroot_tar && rm $buildroot_tar
+fi
 
-cd ./buildroot*
+cd "${buildroot_tar%.tar.gz}"
 
 make BR2_EXTERNAL=../kubos-linux-build ${board}_defconfig
 
@@ -28,4 +31,9 @@ rm /usr/bin/*_toolchain -R
 
 echo "Starting Build"
 
-make
+if [ -z ${KUBOS_BUILD_CPUS+x} ]
+then
+  make -j ${KUBOS_BUILD_CPUS}
+else
+  make
+fi

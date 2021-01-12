@@ -9,6 +9,10 @@ default:
   tags:
     - kubos
     - docker
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - ../buildroot*
 
 .tagged: &tagged  # only build if both kubos and kubos-linux-build are tagged
   rules:
@@ -30,18 +34,21 @@ build_bbb:
   <<: *tagged
   variables:
     KUBOS_BOARD: beaglebone-black
+    KUBOS_BUILD_CPUS: 5
   <<: *build_bbb
 
 build_mbm2:
   <<: *tagged
   variables:
     KUBOS_BOARD: pumpkin-mbm2
+    KUBOS_BUILD_CPUS: 5
   <<: *build_bbb
 
 build_iobc:
   <<: *tagged
   variables:
     KUBOS_BOARD: at91sam9g20isis
+    KUBOS_BUILD_CPUS: 5
   script:
     - ./build.sh | tee full_build.log
   artifacts:
