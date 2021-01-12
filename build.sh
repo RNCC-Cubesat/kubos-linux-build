@@ -25,10 +25,6 @@ cd "${buildroot_tar%.tar.gz}"
 
 make BR2_EXTERNAL=../kubos-linux-build ${board}_defconfig
 
-echo "Removing old toolchains"
-
-rm /usr/bin/*_toolchain -R
-
 echo "Starting Build"
 
 if [ -z ${KUBOS_BUILD_CPUS+x} ]
