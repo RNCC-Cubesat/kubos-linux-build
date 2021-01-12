@@ -43,7 +43,6 @@ build_iobc:
   variables:
     KUBOS_BOARD: at91sam9g20isis
   script:
-    - cd ~/project/kubos-linux-build
     - ./build.sh | tee full_build.log
   artifacts:
     name: '$KUBOS_BOARD'
