@@ -1,0 +1,20 @@
+--- old-linux-4.4.23/scripts/dtc/dtc-lexer.l	2021-01-18 21:20:21.822750294 -0800
++++ linux-4.4.23/scripts/dtc/dtc-lexer.l	2021-01-18 21:21:01.325305049 -0800
+@@ -38,7 +38,6 @@
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
+ extern bool treesource_error;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+--- old-linux-4.4.23/scripts/dtc/dtc-lexer.lex.c_shipped	2021-01-18 21:20:21.822750294 -0800
++++ linux-4.4.23/scripts/dtc/dtc-lexer.lex.c_shipped	2021-01-18 21:22:27.657024601 -0800
+@@ -637,7 +637,6 @@
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
+ extern bool treesource_error;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
