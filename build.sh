@@ -16,16 +16,16 @@ cd .. #cd out of the kubos-linux-build directory
 
 echo "Getting Buildroot"
 
+rm -r ./buildroot*
 wget $buildroot_url && tar xzf $buildroot_tar && rm $buildroot_tar
-
 cd ./buildroot*
 
 make BR2_EXTERNAL=../kubos-linux-build ${board}_defconfig
 
-echo "Removing old toolchains"
-
-rm /usr/bin/*_toolchain -R
-
 echo "Starting Build"
 
-make
+if [ -z ${KUBOS_BUILD_CPUS+x} ]; then
+  make -j ${KUBOS_BUILD_CPUS}
+else
+  make
+fi
