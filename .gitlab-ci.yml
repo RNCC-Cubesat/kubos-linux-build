@@ -5,7 +5,7 @@ stages:
 default:
   image:
     name: kubos/kubos-dev:latest
-    entrypoint: ["/usr/bin/env"]
+    entrypoint: ['bash', '-c', 'useradd builder && exec su builder -c bash']
   tags:
     - kubos
     - docker
