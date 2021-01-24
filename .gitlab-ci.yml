@@ -16,6 +16,7 @@ default:
 
 .build_bbb: &build_bbb
   script:
+    - rm -rf ../buildroot* # remove old buildroot dir
     - ./build.sh | tee full_build.log
   artifacts:
     name: '$KUBOS_BOARD'

@@ -16,7 +16,6 @@ cd .. #cd out of the kubos-linux-build directory
 
 echo "Getting Buildroot"
 
-rm -r ./buildroot*
 wget $buildroot_url && tar xzf $buildroot_tar && rm $buildroot_tar
 cd ./buildroot*
 
