@@ -3,7 +3,7 @@ stages:
   - deploy
 
 before_script:
-  - exec su builder
+  - useradd build_user && exec su build_user
 
 default:
   tags:
