@@ -3,7 +3,7 @@ stages:
   - deploy
 
 before_script:
-  - exec su builder -c bash
+  - exec su builder
 
 default:
   tags:
