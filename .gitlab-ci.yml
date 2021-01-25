@@ -2,13 +2,12 @@ stages:
   - test
   - deploy
 
+before_script:
+  - exec su builder -c bash
+
 default:
-  image:
-    name: kubos/kubos-dev:latest
-    entrypoint: ['bash', '-c', 'useradd builder && exec su builder -c bash']
   tags:
     - kubos
-    - docker
 
 .tagged: &tagged  # only build if both kubos and kubos-linux-build are tagged
   rules:
