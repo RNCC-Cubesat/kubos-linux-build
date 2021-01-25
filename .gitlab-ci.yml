@@ -2,9 +2,6 @@ stages:
   - test
   - deploy
 
-before_script:
-  - useradd build_user && exec su build_user
-
 default:
   tags:
     - kubos
