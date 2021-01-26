@@ -17,7 +17,7 @@ cd .. #cd out of the kubos-linux-build directory
 echo "Getting Buildroot"
 
 wget $buildroot_url && tar xzf $buildroot_tar && rm $buildroot_tar
-cd ./buildroot*
+cd ./buildroot-2019.02.2
 
 make BR2_EXTERNAL=../kubos-linux-build ${board}_defconfig ||  make BR2_EXTERNAL=../kubos-linux-build ${board}_defconfig
 
