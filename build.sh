@@ -29,3 +29,12 @@ if [ -z ${KUBOS_BUILD_CPUS+x} ]; then
 else
   make
 fi
+
+# move build output into source/output for inclusion in CI artifacts
+output_dir="../kubos-linux-build/output"
+mkdir -p ${output_dir}
+mv output/images/kubos-linux.tar.gz ${output_dir}
+mv output/images/aux-sd.tar.gz ${output_dir}
+mv output/images/kpack.its ${output_dir}
+cd ${output_dir}
+BINARIES_DIR=../../buildroot-2019.02.2/output/images/ ../tools/kubos-package.sh -t ${KUBOS_BOARD} -b 1.5 -v kubos

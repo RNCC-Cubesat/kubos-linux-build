@@ -12,14 +12,13 @@ default:
 
 .build_bbb: &build_bbb
   script:
-    - rm -rf ../buildroot* # remove old buildroot dir
     - ./build.sh | tee full_build.log
   artifacts:
     name: '$KUBOS_BOARD'
     paths:
-      - ../buildroot-2019.02.2/output/images/kubos-linux.tar.gz
-      - ../buildroot-2019.02.2/output/images/aux-sd.tar.gz
-      - ../buildroot-2019.02.2/output/images/kpack-base.itb
+      - output/kubos-linux.tar.gz
+      - output/aux-sd.tar.gz
+      - output/kpack-kubos.itb
       - full_build.log
 
 build_mbm2:
