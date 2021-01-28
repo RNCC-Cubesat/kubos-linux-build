@@ -23,14 +23,14 @@ branch=1.2
 rflag=false
 output=output
 
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "Please run script as root"
+if [[ $(/usr/bin/id -u) -eq 0 ]]; then
+    echo "Please do not run script as root"
     exit
 fi
 
 # Make sure that we can find the `dtc` command
 # (The binary is target-independent so we can just use the one in the BBB toolchain directory)
-export PATH=$PATH:/usr/bin/bbb_toolchain/usr/bin
+export PATH=$PATH:${BINARIES_DIR}/usr/bin
 
 # Process command arguments
 

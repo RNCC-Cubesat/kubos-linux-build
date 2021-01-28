@@ -3,12 +3,8 @@ stages:
   - deploy
 
 default:
-  image:
-    name: kubos/kubos-dev:latest
-    entrypoint: ["/usr/bin/env"]
   tags:
     - kubos
-    - docker
 
 .tagged: &tagged  # only build if both kubos and kubos-linux-build are tagged
   rules:
@@ -20,36 +16,16 @@ default:
   artifacts:
     name: '$KUBOS_BOARD'
     paths:
-      - ../buildroot-2019.02.2/output/images/kubos-linux.tar.gz
-      - ../buildroot-2019.02.2/output/images/aux-sd.tar.gz
-      - ../buildroot-2019.02.2/output/images/kpack-base.itb
+      - output/kubos-linux.tar.gz
+      - output/aux-sd.tar.gz
+      - output/kpack-kubos.itb
       - full_build.log
-
-build_bbb:
-  <<: *tagged
-  variables:
-    KUBOS_BOARD: beaglebone-black
-  <<: *build_bbb
 
 build_mbm2:
   <<: *tagged
   variables:
     KUBOS_BOARD: pumpkin-mbm2
   <<: *build_bbb
-
-build_iobc:
-  <<: *tagged
-  variables:
-    KUBOS_BOARD: at91sam9g20isis
-  script:
-    - ./build.sh | tee full_build.log
-  artifacts:
-    name: '$KUBOS_BOARD'
-    paths:
-      - ../buildroot-2019.02.2/output/images/kubos-linux.tar.gz
-      - ../buildroot-2019.02.2/output/images/at91sam9g20isis.dtb
-      - ../buildroot-2019.02.2/output/images/u-boot.bin
-      - full_build.log
 
 release:
   stage: deploy
