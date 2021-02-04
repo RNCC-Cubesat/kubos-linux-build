@@ -1,0 +1,21 @@
+# Create base `mission` option in config menu
+menuconfig BR2_PACKAGE_MISSION
+	bool "Mission Packages"
+	default y
+	help
+		Enable Mission services and libraries
+
+if BR2_PACKAGE_MISSION
+	
+	config BR2_MISSION_VERSION
+		string "Mission Branch Source Version"
+		default "master"
+		help
+			Release, tag, or branch of the Mission repo to use when building Mission
+			packages
+
+    
+    source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/mission/python-mission-app/Config.in"
+    source "$BR2_EXTERNAL_KUBOS_LINUX_PATH/package/mission/rust-mission-app/Config.in"
+endif
+

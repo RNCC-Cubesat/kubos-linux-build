@@ -1,0 +1,42 @@
+menuconfig BR2_PACKAGE_PYTHON_MISSION_APP
+    bool "Python Mission App"
+    default n
+    depends on BR2_PACKAGE_PYTHON3
+    select BR2_PACKAGE_PYTHON_GRAPHENE
+    select BR2_PACKAGE_KUBOS_SERVICE_LIB
+    help
+        Include the Example Python Mission App
+        
+if BR2_PACKAGE_PYTHON_MISSION_APP
+
+config BR2_PYTHON_MISSION_APP_INIT_LVL
+    int "Mission App Init Run Level"
+    default 20
+    range 10 99
+    depends on BR2_PACKAGE_PYTHON_MISSION_APP
+    help
+        The initialization priority level of the Python Mission app.
+        The lower the number, the earlier the service is initialized.
+
+config BR2_PYTHON_MISSION_APP_IP
+    string "Mission App IP Address"
+    default "0.0.0.0"
+    depends on BR2_PACKAGE_PYTHON_MISSION_APP
+    help
+        The IP address which the service should use to receive GraphQL requests
+
+config BR2_PYTHON_MISSION_APP_STRING_VAR
+    string "String Var"
+    default "/path/to/hello/world"
+    depends on BR2_PACKAGE_PYTHON_MISSION_APP
+    help
+        An example string variable for the mission app
+        
+config BR2_PYTHON_MISSION_APP_PORT
+    int "Mission app Port"
+    default 8150
+    depends on BR2_PACKAGE_PYTHON_MISSION_APP
+    help
+        The port which the service should use to receive GraphQL requests
+
+endif
