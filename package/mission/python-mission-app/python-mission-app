@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Start the Mission App in the background
+# passing in the location of the config.toml file 
+# (in the same directory as the service)
+# /usr/bin/python-mission-app -c /etc/mission-config.toml &
+/usr/bin/python-mission-app &
+
+exit 0
