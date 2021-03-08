@@ -30,12 +30,23 @@ Currently empty.  Same as the external.mk file, BuildRoot requires that this fil
 
 ### board/kubos/{board}
 
-Inside of each of these folders are the patches and configuration files for each of the components required to build Linux for
-a particular board.
+Inside of each of these folders are the patches and configuration files for each of the components required to build Linux for a particular board.
+
+This includes:
+- `linux-kubos.config`: the kernel config for the board (condensed).
+- `{board}_config`: the uboot bootloader config for the board
+- `{board}.dts`: the device tree source used for the board
+- `post-image.sh`: script to run post buildroot build
+- `overlay`: directory containing a filesystem overlay- files here will be copied to the rootfs
+
+After changing the kernel configuration (e.g. through `make linux-menuconfig`) you can update the kernel config for a particular board by running `make linux-savedefconfig` and then copying the `defconfig` file from the kernel directory to `board/kubos/{board}/linux-kubos.config`
 
 ### configs
 
 This folder contains the BuildRoot configuration files needed to build each OBC supported by Kubos.
+
+After changing the buildroot configuration (e.g. through `make menuconfig`) you can update the last-used board defconfig with `make savedefconfig`
+
 
 ## Installation
 
