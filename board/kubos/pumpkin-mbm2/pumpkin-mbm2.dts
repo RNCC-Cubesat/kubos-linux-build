@@ -31,6 +31,16 @@
 		hw_margin_ms = <200>;
 		always-running;
 	};
+    
+    pps {
+        compatible = "pps-gpio";
+        pinctrl-names = "default";
+        pinctrl-0 = <&pps_pins>;
+        status = "okay";
+        gpios = <&gpio2 1 0>;
+        assert-rising-edge;
+    };
+
 };
 
 &am33xx_pinmux {
@@ -92,6 +102,12 @@
 			0x198 (PIN_OUTPUT_PULLUP | MUX_MODE3)	/* MOSI - H1.23 */
 			0x19c (PIN_OUTPUT_PULLUP | MUX_MODE3)	/* CS   - H1.24 */
 		>;
+	};
+
+	pps_pins: pinmux_pps_pins {
+        /* PPS: H1.6 / GPIO2_1 / P8_18 / gpio65
+           fast slew, input, pulldown, muxmode7 */
+		pinctrl-single,pins = <0x08c 0x37>;
 	};
 
 };
@@ -169,3 +185,4 @@
 		ti,chan-step-sampledelay = <0x0 0x0 0x0 0x0 0x0 0x0 0x0>;
 	};
 };
+
