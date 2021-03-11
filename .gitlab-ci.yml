@@ -6,10 +6,6 @@ default:
   tags:
     - kubos
 
-.tagged: &tagged  # only build if both kubos and kubos-linux-build are tagged
-  rules:
-    - if: $KUBOS_TAG && $CI_COMMIT_TAG  # KUBOS_TAG passed from public/kubos (multi-project pipeline)
-
 .build_bbb: &build_bbb
   script:
     - ./build.sh | tee full_build.log
@@ -22,11 +18,11 @@ default:
       - full_build.log
 
 build_mbm2:
-  <<: *tagged
   variables:
     KUBOS_BOARD: pumpkin-mbm2
   <<: *build_bbb
 
+# do a release when both kubos and kubos-linux-build are tagged
 release:
   stage: deploy
   image: registry.gitlab.com/gitlab-org/release-cli:latest
@@ -37,4 +33,4 @@ release:
     tag_name: '$KUBOS_TAG-$CI_COMMIT_TAG'
     description: 'kubos source $KUBOS_TAG built against kubos-linux-build $CI_COMMIT_TAG'
   rules:
-    - if: $KUBOS_TAG =~ /^[0-9]+(\.[0-9]+)*$/
+    - if: $KUBOS_TAG =~ /^[0-9]+(\.[0-9]+)*$/ && $CI_COMMIT_TAG =~ /^[0-9]+(\.[0-9]+)*$/
