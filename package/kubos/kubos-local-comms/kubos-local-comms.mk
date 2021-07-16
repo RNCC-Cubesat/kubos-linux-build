@@ -42,16 +42,16 @@ define NSL_DUPLEX_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(BUILD_DIR)/kubos-$(KUBOS_VERSION)/$(CARGO_OUTPUT_DIR)/local-comms-service \
 		$(TARGET_DIR)/usr/sbin
 		
-	echo 'CHECK PROCESS local-comms-service PIDFILE /var/run/local-comms-service.pid' > $(TARGET_DIR)/etc/monit.d/kubos-nsl-duplex.cfg
-	echo '	START PROGRAM = "/etc/init.d/S${BR2_KUBOS_NSL_DUPLEX_INIT_LVL}kubos-nsl-duplex start"' >> $(TARGET_DIR)/etc/monit.d/kubos-nsl-duplex.cfg 
+	echo 'CHECK PROCESS local-comms-service PIDFILE /var/run/local-comms-service.pid' > $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg
+	echo '	START PROGRAM = "/etc/init.d/S${BR2_KUBOS_NSL_DUPLEX_INIT_LVL}kubos-local-comms start"' >> $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg 
 	echo '	IF ${BR2_KUBOS_NSL_DUPLEX_RESTART_COUNT} RESTART WITHIN ${BR2_KUBOS_NSL_DUPLEX_RESTART_CYCLES} CYCLES THEN TIMEOUT' \
-	>> $(TARGET_DIR)/etc/monit.d/kubos-nsl-duplex.cfg
+	>> $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg
 endef
 
 # Install the init script
 define NSL_DUPLEX_INSTALL_INIT_SYSV
-	$(INSTALL) -D -m 0755 $(BR2_EXTERNAL_KUBOS_LINUX_PATH)/package/kubos/kubos-nsl-duplex/kubos-nsl-duplex \
-		$(TARGET_DIR)/etc/init.d/S$(BR2_KUBOS_NSL_DUPLEX_INIT_LVL)kubos-nsl-duplex
+	$(INSTALL) -D -m 0755 $(BR2_EXTERNAL_KUBOS_LINUX_PATH)/package/kubos/kubos-local-comms/kubos-local-comms \
+		$(TARGET_DIR)/etc/init.d/S$(BR2_KUBOS_NSL_DUPLEX_INIT_LVL)kubos-local-comms
 endef
 
 $(eval $(virtual-package))
