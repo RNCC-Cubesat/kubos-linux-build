@@ -4,22 +4,22 @@
 #
 ###############################################
 
-KUBOS_NSL_DUPLEX_DEPENDENCIES = kubos
+KUBOS_LOCAL_COMMS_DEPENDENCIES = kubos
 
-KUBOS_NSL_DUPLEX_POST_BUILD_HOOKS += NSL_DUPLEX_BUILD_CMDS
-KUBOS_NSL_DUPLEX_INSTALL_STAGING = YES
-KUBOS_NSL_DUPLEX_POST_INSTALL_STAGING_HOOKS += NSL_DUPLEX_INSTALL_STAGING_CMDS
-KUBOS_NSL_DUPLEX_POST_INSTALL_TARGET_HOOKS += NSL_DUPLEX_INSTALL_TARGET_CMDS
-KUBOS_NSL_DUPLEX_POST_INSTALL_TARGET_HOOKS += NSL_DUPLEX_INSTALL_INIT_SYSV
+KUBOS_LOCAL_COMMS_POST_BUILD_HOOKS += LOCAL_COMMS_BUILD_CMDS
+KUBOS_LOCAL_COMMS_INSTALL_STAGING = YES
+KUBOS_LOCAL_COMMS_POST_INSTALL_STAGING_HOOKS += LOCAL_COMMS_INSTALL_STAGING_CMDS
+KUBOS_LOCAL_COMMS_POST_INSTALL_TARGET_HOOKS += LOCAL_COMMS_INSTALL_TARGET_CMDS
+KUBOS_LOCAL_COMMS_POST_INSTALL_TARGET_HOOKS += LOCAL_COMMS_INSTALL_INIT_SYSV
 
-define NSL_DUPLEX_BUILD_CMDS
+define LOCAL_COMMS_BUILD_CMDS
 	cd $(BUILD_DIR)/kubos-$(KUBOS_VERSION)/services/local-comms-service && \
 	PATH=$(PATH):~/.cargo/bin:/usr/bin/iobc_toolchain/usr/bin && \
 	PKG_CONFIG_ALLOW_CROSS=1 CC=$(TARGET_CC) RUSTFLAGS="-Clinker=$(TARGET_CC)" cargo build --package local-comms-service --target $(CARGO_TARGET) --release
 endef
 
 # Generate the config settings for the service and add them to a fragment file
-define NSL_DUPLEX_INSTALL_STAGING_CMDS
+define LOCAL_COMMS_INSTALL_STAGING_CMDS
 	echo '[nsl-duplex-comms-service.addr]' > $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 	echo 'ip = ${BR2_KUBOS_LOCAL_COMMS_IP}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 	echo -e 'port = ${BR2_KUBOS_LOCAL_COMMS_PORT}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
@@ -35,7 +35,7 @@ define NSL_DUPLEX_INSTALL_STAGING_CMDS
 endef
 
 # Install the application into the rootfs file system
-define NSL_DUPLEX_INSTALL_TARGET_CMDS
+define LOCAL_COMMS_INSTALL_TARGET_CMDS
 	mkdir -p $(TARGET_DIR)/usr/sbin
 	PATH=$(PATH):~/.cargo/bin:$(HOST_DIR)/usr/bin && \
 	arm-linux-strip $(BUILD_DIR)/kubos-$(KUBOS_VERSION)/$(CARGO_OUTPUT_DIR)/local-comms-service
@@ -49,7 +49,7 @@ define NSL_DUPLEX_INSTALL_TARGET_CMDS
 endef
 
 # Install the init script
-define NSL_DUPLEX_INSTALL_INIT_SYSV
+define LOCAL_COMMS_INSTALL_INIT_SYSV
 	$(INSTALL) -D -m 0755 $(BR2_EXTERNAL_KUBOS_LINUX_PATH)/package/kubos/kubos-local-comms/kubos-local-comms \
 		$(TARGET_DIR)/etc/init.d/S$(BR2_KUBOS_LOCAL_COMMS_INIT_LVL)kubos-local-comms
 endef
