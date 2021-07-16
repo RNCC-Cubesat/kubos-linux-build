@@ -1,9 +1,9 @@
 menuconfig BR2_PACKAGE_KUBOS_LOCAL_COMMS
-    bool "NSL Duplex Comms Service"
+    bool "Kubos Local Comms Service"
     default n
     select BR2_PACKAGE_HAS_KUBOS_LOCAL_COMMS
     help
-        Include NSL Duplex Kubos comms service.
+        Include Kubos Local Kubos comms service.
 
 if BR2_PACKAGE_KUBOS_LOCAL_COMMS
 
@@ -13,7 +13,7 @@ config BR2_KUBOS_LOCAL_COMMS_INIT_LVL
     range 10 99
     depends on BR2_PACKAGE_KUBOS_LOCAL_COMMS
     help
-        The initialization priority level of the NSL Duplex Kubos service.
+        The initialization priority level of the Kubos Local Kubos service.
         The lower the number, the earlier the service is initialized.
 
 config BR2_KUBOS_LOCAL_COMMS_RESTART_COUNT
@@ -85,7 +85,7 @@ config BR2_KUBOS_LOCAL_COMMS_BUS
     default "/dev/ttyS1"
     depends on BR2_PACKAGE_KUBOS_LOCAL_COMMS
     help
-        The UART bus which the NSL Duplex device is connected to
+        The UART bus which the Kubos Local device is connected to
 
 config BR2_KUBOS_LOCAL_COMMS_PING
     int "Idle Ping Frequency"
