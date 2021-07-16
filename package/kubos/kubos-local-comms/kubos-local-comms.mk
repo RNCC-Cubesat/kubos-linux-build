@@ -21,17 +21,17 @@ endef
 # Generate the config settings for the service and add them to a fragment file
 define NSL_DUPLEX_INSTALL_STAGING_CMDS
 	echo '[nsl-duplex-comms-service.addr]' > $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo 'ip = ${BR2_KUBOS_NSL_DUPLEX_IP}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo -e 'port = ${BR2_KUBOS_NSL_DUPLEX_PORT}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo 'ip = ${BR2_KUBOS_LOCAL_COMMS_IP}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo -e 'port = ${BR2_KUBOS_LOCAL_COMMS_PORT}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 	echo '[nsl-duplex-comms-service.comms]' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo 'ip = ${BR2_KUBOS_NSL_DUPLEX_COMMS_IP}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo 'max_num_handlers = ${BR2_KUBOS_NSL_DUPLEX_HANDLERS}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo 'ip = ${BR2_KUBOS_LOCAL_COMMS_COMMS_IP}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo 'max_num_handlers = ${BR2_KUBOS_LOCAL_COMMS_HANDLERS}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 	# KConfig doesn't have a list type, so we're just going to take a string (ex. "[1, 2, 3]") and strip the quotes
-	echo 'downlink_ports = $(patsubst "%",%,${BR2_KUBOS_NSL_DUPLEX_DOWNLINK_PORTS})' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo -e 'timeout = ${BR2_KUBOS_NSL_DUPLEX_TIMEOUT}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo 'downlink_ports = $(patsubst "%",%,${BR2_KUBOS_LOCAL_COMMS_DOWNLINK_PORTS})' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo -e 'timeout = ${BR2_KUBOS_LOCAL_COMMS_TIMEOUT}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 	echo '[nsl-duplex-comms-service]' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo 'bus = ${BR2_KUBOS_NSL_DUPLEX_BUS}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
-	echo -e 'ping_freq = ${BR2_KUBOS_NSL_DUPLEX_PING}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo 'bus = ${BR2_KUBOS_LOCAL_COMMS_BUS}' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
+	echo -e 'ping_freq = ${BR2_KUBOS_LOCAL_COMMS_PING}\n' >> $(KUBOS_CONFIG_FRAGMENT_DIR)/local-comms-service
 endef
 
 # Install the application into the rootfs file system
@@ -43,15 +43,15 @@ define NSL_DUPLEX_INSTALL_TARGET_CMDS
 		$(TARGET_DIR)/usr/sbin
 		
 	echo 'CHECK PROCESS local-comms-service PIDFILE /var/run/local-comms-service.pid' > $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg
-	echo '	START PROGRAM = "/etc/init.d/S${BR2_KUBOS_NSL_DUPLEX_INIT_LVL}kubos-local-comms start"' >> $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg 
-	echo '	IF ${BR2_KUBOS_NSL_DUPLEX_RESTART_COUNT} RESTART WITHIN ${BR2_KUBOS_NSL_DUPLEX_RESTART_CYCLES} CYCLES THEN TIMEOUT' \
+	echo '	START PROGRAM = "/etc/init.d/S${BR2_KUBOS_LOCAL_COMMS_INIT_LVL}kubos-local-comms start"' >> $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg 
+	echo '	IF ${BR2_KUBOS_LOCAL_COMMS_RESTART_COUNT} RESTART WITHIN ${BR2_KUBOS_LOCAL_COMMS_RESTART_CYCLES} CYCLES THEN TIMEOUT' \
 	>> $(TARGET_DIR)/etc/monit.d/kubos-local-comms.cfg
 endef
 
 # Install the init script
 define NSL_DUPLEX_INSTALL_INIT_SYSV
 	$(INSTALL) -D -m 0755 $(BR2_EXTERNAL_KUBOS_LINUX_PATH)/package/kubos/kubos-local-comms/kubos-local-comms \
-		$(TARGET_DIR)/etc/init.d/S$(BR2_KUBOS_NSL_DUPLEX_INIT_LVL)kubos-local-comms
+		$(TARGET_DIR)/etc/init.d/S$(BR2_KUBOS_LOCAL_COMMS_INIT_LVL)kubos-local-comms
 endef
 
 $(eval $(virtual-package))
