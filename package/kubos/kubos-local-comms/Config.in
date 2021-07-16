@@ -8,7 +8,7 @@ menuconfig BR2_PACKAGE_KUBOS_LOCAL_COMMS
 if BR2_PACKAGE_KUBOS_LOCAL_COMMS
 
 config BR2_KUBOS_LOCAL_COMMS_INIT_LVL
-    int "Duplex Service Run Level"
+    int "Local Comms Service Run Level"
     default 90
     range 10 99
     depends on BR2_PACKAGE_KUBOS_LOCAL_COMMS
